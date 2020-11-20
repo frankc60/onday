@@ -1,0 +1,20 @@
+{
+  "name": "onday",
+  "version": "1.0.0",
+  "description": "Get some historical event on the given date (day / month)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankc60/onday"
+  },
+  "keywords": [
+    "historical",
+    "api",
+    "retrieve"
+  ],
+  "author": "frankc60",
+  "license": "ISC"
+}
