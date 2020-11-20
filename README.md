@@ -3,15 +3,15 @@
 ![npm](https://img.shields.io/npm/v/onday)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/onday)
 
-Returns one line of information on a historical event that happened on the given date ( day and month)
+Returns a random one-line information on a historical event that happened on the given date ( day and month ).
 
 ## Install
 
-```js
-$ npm install onday
+```shell
+$ npm install --save onday
 ```
 
-## Usage
+## Example Usage
 
 ```js
 const onday = require("onday");
@@ -21,7 +21,7 @@ const month = 10;
 
 let randomDate = new onday(day, month);
 
-randomDate
+randomDate1
   .check()
   .then((info) => {
     console.log(`on ${day}/${month} this happened: ${info}`);
@@ -29,4 +29,10 @@ randomDate
   .catch((error) => {
     console.error(`Error ${error}`);
   });
+```
+
+### Example Output
+
+```shell
+on 8/10 this happened: October 8th is the day in 1962 that Algeria joins the United Nations.
 ```
