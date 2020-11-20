@@ -32,4 +32,5 @@ class onday {
     });
   }
 }
-module.exports.onday;
+
+module.exports = onday;
