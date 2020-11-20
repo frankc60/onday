@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Get some historical event on the given date (day / month)",
   "main": "index.js",
   "scripts": {
