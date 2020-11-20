@@ -1,6 +1,6 @@
 const https = require("http");
 
-class Ontoday {
+class onday {
   constructor(d, m) {
     this.d = d;
     this.m = m;
@@ -32,10 +32,4 @@ class Ontoday {
     });
   }
 }
-
-exports default Ontoday();
-let x = new Ontoday(08, 10);
-
-x.check().then((x) => {
-  console.log("on today>" + x);
-});
+module.exports.onday;

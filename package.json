@@ -15,6 +15,7 @@
     "api",
     "retrieve"
   ],
+   "license": "MIT",
   "author": "frankc60",
   "license": "ISC"
 }
