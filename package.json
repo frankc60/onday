@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "terser": "^5.5.0",
+    "terser": "^5.5.0"
   },
   "repository": {
     "type": "git",
