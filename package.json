@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.4.0",
+  "version": "2.4.3",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "author": "frankc60",
@@ -28,8 +28,8 @@
     "url": "https://github.com/frankc60/onday"
   },
   "keywords": [
-    "historical",
-    "api",
-    "retrieve"
+    "history",
+    "promise",
+    "dates"
   ]
 }
