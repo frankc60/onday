@@ -1,8 +1,8 @@
 {
   "name": "onday",
-  "version": "2.2.20",
+  "version": "2.2.21",
   "description": "Get some historical event on the given date (day / month)",
-  "main": "index.js",
+  "main": "onday.min.js",
   "scripts": {
     "minifyJS": "terser index.js --compress --mangle reserved=['onday','require','exports'],toplevel=true --warn --output onday.min.js",
     "production": "npm run version:bump --silent && rm -f onday.min.js && npm run minifyJS --silent && npm run version:add --silent",
