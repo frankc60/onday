@@ -26,6 +26,8 @@ Each call to the _check()_ method will return different contents.
 ### Example (using an async / await function)
 
 ```js
+const onday = require("onday");
+
 const fn = async () => {
   let contents = await new onday(25, 12).check();
   console.log(`contents: ${contents}`);
@@ -47,7 +49,7 @@ contents: December 25th is the day in 1826 that the Eggnog Riot at the United St
 const onday = require("onday");
 
 const day = 8;
-const month = 10;
+const month = 10; //October
 
 let randomDate = new onday(day, month);
 
