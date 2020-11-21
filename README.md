@@ -11,6 +11,26 @@ Returns a random one sentence about a historical event that happened on the give
 $ npm install --save onday
 ```
 
+## Usage
+
+The Class Constructor accepts two numeric values: _day_ and _month_
+for example:
+
+```js
+let findOnThisDate = new onday(25, 12); //Christmas Day
+```
+
+Calling the method check() returns a Promise with the contents.
+for example (using an async / await function):
+
+```js
+const fn = async () => {
+  let contents = await new onday(day, month).check();
+  console.log(`contents: ${contents}`);
+};
+fn();
+```
+
 ## Example Usage
 
 Using then().catch() on the returned Promise:
@@ -37,24 +57,4 @@ randomDate1
 
 ```shell
 on 8/10 this happened: October 8th is the day in 1962 that Algeria joins the United Nations.
-```
-
-## Usage
-
-The Class Constructor accepts two numeric values: _day_ and _month_
-for example:
-
-```js
-let findOnThisDate = new onday(25, 12); //Christmas Day
-```
-
-Calling the method check() returns a Promise with the contents.
-for example (using an async / await function):
-
-```js
-const fn = async () => {
-  let contents = await new onday(day, month).check();
-  console.log(`contents: ${contents}`);
-};
-fn();
 ```
