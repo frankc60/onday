@@ -1,5 +1,12 @@
 const https = require("http");
 
+/**
+ * class onday
+ * @params  d - day of month
+ * @params  m - month value
+ *
+ */
+
 class onday {
   constructor(d, m) {
     this.d = d;
