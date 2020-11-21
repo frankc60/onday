@@ -14,14 +14,15 @@ $ npm install --save onday
 ## Usage
 
 The Class Constructor accepts two numeric values: _day_ and _month_
-for example:
+For example:
 
 ```js
 let findOnThisDate = new onday(25, 12); //Christmas Day
 ```
 
-Calling the method check() returns a Promise with the contents.
-for example (using an async / await function):
+Calling the method _check()_ returns a Promise with the contents.
+Each call to the _check()_ method will return different contents.
+For example (using an async / await function):
 
 ```js
 const fn = async () => {
@@ -29,6 +30,7 @@ const fn = async () => {
   console.log(`contents: ${contents}`);
 };
 fn();
+fn(); //can be called multiple times!
 ```
 
 ## Example Usage
