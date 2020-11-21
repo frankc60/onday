@@ -22,7 +22,8 @@ let findOnThisDate = new onday(25, 12); //Christmas Day
 ```
 
 Calling the method _check()_ returns a Promise with the contents.
-Each call to the _check()_ method will return different contents.
+Each call to the _check()_ method will return different content for the given date.
+You can also pass a date argument: (day,month) to the _check()_ method. For example: `findOnThisDate.check(1,1) //Change to 1st January`
 
 ### Example (using an async / await function)
 

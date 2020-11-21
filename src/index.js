@@ -18,10 +18,10 @@ class onday {
     this.m = m;
   }
 
-  check() {
+  check(d = this.d, m = this.m) {
     return new Promise((resolve, reject) => {
       https
-        .get(`http://numbersapi.com/${this.m}/${this.d}/date`, (resp) => {
+        .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
           let data = "";
 
           // A chunk of data has been recieved.
