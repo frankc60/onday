@@ -49,7 +49,7 @@ If not given, then the Class instances constructor properties (day,month) values
 
 #### Returns
 
-A Promise containing a sentence, about a historical event from the date parameters.
+A Promise containing a sentence, about a historical event from the date parameters, or if not given then the class instance properties.
 
 #### Example 1
 
