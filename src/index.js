@@ -21,6 +21,32 @@ class onday {
     this.m = m;
   }
 
+  doy(dd = onday._PRV_NOW_DAY, mm = onday._PRV_NOW_MONTH) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const thisYear = new Date(); //just used current year.
+        console.log(dd, mm);
+        const today = new Date(
+          thisYear.getFullYear(),
+
+          mm - 1,
+          dd,
+
+          1,
+          0,
+          1,
+          0
+        ); // month is 0 based, need to add 1
+        let doy = await Math.ceil(
+          (today - new Date(today.getFullYear(), 0, 1)) / 86400000
+        );
+        resolve([doy, today]); //add one because is 0 based, ie, 1 jan is day 0, should be day 1 !!
+      } catch (error) {
+        reject(`Error 3: ${error}`);
+      }
+    });
+  }
+
   check(d = this.d, m = this.m) {
     return new Promise((resolve, reject) => {
       https
