@@ -52,7 +52,7 @@ class onday {
   }
 
   check(d = this.d, m = this.m) {
-    console.log(`d:${d} - ${this.months[m]}`);
+    //console.log(`d:${d} - ${this.months[m]}`);
 
     return new Promise((resolve, reject) => {
       https
@@ -93,4 +93,12 @@ test
   .then((b) => {
     console.log(`b: ${b}`);
   });
+*/
+/*
+const fn = async () => {
+  let contents = await new onday(25, 12).check();
+  console.log(`contents: ${contents}`);
+};
+fn();
+fn(); //can be called multiple times!
 */
