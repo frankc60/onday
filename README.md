@@ -39,11 +39,10 @@ Use this method to retrieve information for a given date.
 onday.check(15, 10); //15 October
 ```
 
-#### Description
-
 #### Parameters
 
 day value [numeric or string]
+
 month value [number or string]
 
 #### Returns
