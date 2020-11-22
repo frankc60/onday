@@ -27,27 +27,32 @@ Each call to the _check()_ method will return different content for the given da
 
 You can also pass a date argument: (day,month) to the _check()_ method. For example: `findOnThisDate.check(1,1) //Change to 1st January`
 
-### Example (using an async / await function)
+## Methods
+
+### check()
+
+Use this method to retrieve information for a given date.
+
+#### Syntax
 
 ```js
-const onday = require("onday");
-
-const fn = async () => {
-  let contents = await new onday(25, 12).check();
-  console.log(`contents: ${contents}`);
-};
-fn();
-fn(); //can be called multiple times!
+onday.check(15, 10); //15 October
 ```
 
-### Example Output
+#### Description
 
-```shell
-contents: December 25th is the day in 1974 that Cyclone Tracy devastates Darwin, Northern Territory Australia.
-contents: December 25th is the day in 1826 that the Eggnog Riot at the United States Military Academy concludes after beginning the previous evening.
-```
+#### Parameters
 
-### Example ( using then().catch() )
+day value [numeric or string]
+month value [number or string]
+
+#### Returns
+
+A Promise containing a sentence, about a historical event from the date parameters.
+
+#### Example 1
+
+Using then().catch()
 
 ```js
 const onday = require("onday");
@@ -67,8 +72,30 @@ randomDate1
   });
 ```
 
-### Example Output
+##### example Output
 
 ```shell
 on 8/10 this happened: October 8th is the day in 1962 that Algeria joins the United Nations.
+```
+
+#### Example 2
+
+Using an async / await function.
+
+```js
+const onday = require("onday");
+
+const fn = async () => {
+  let contents = await new onday(25, 12).check();
+  console.log(`contents: ${contents}`);
+};
+fn();
+fn(); //can be called multiple times!
+```
+
+##### Example Output
+
+```shell
+contents: December 25th is the day in 1974 that Cyclone Tracy devastates Darwin, Northern Territory Australia.
+contents: December 25th is the day in 1826 that the Eggnog Riot at the United States Military Academy concludes after beginning the previous evening.
 ```
