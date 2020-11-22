@@ -16,7 +16,7 @@ class onday {
   static _PRV_NOW_MONTH = new Date().getMonth() + 1; //need to convert to private with a # but this is not implemented yet in terser minifier..
   static _PRV_NOW_DAY = new Date().getDate();
 
-  constructor(d = this._PRV_NOW_DAY, m = this._PRV_NOW_MONTH) {
+  constructor(d = onday._PRV_NOW_DAY, m = onday._PRV_NOW_MONTH) {
     this.d = d;
     this.m = m;
   }
