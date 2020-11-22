@@ -41,9 +41,11 @@ onday.check(15, 10); //15 October
 
 #### Parameters
 
-day value [numeric or string]
+_Optional_&nbsp;&nbsp;&nbsp;day value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[numeric or string]
 
-month value [number or string]
+_Optional_&nbsp;&nbsp;&nbsp;month value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[number or string]
+
+If not given, then the Class instances constructor (day,month) values will be used instead.
 
 #### Returns
 
