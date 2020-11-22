@@ -13,7 +13,10 @@ const https = require("http");
  */
 
 class onday {
-  constructor(d, m) {
+  static #PRV_NOW_MONTH = new Date().getMonth() + 1;
+  static #PRV_NOW_DAY = new Date().getDate();
+
+  constructor(d = this.#PRV_NOW_DAY, m = this.#PRV_NOW_MONTH) {
     this.d = d;
     this.m = m;
   }
@@ -35,11 +38,11 @@ class onday {
             //console.log(JSON.parse(data).explanation);
           });
           resp.on("error", (er) => {
-            reject("Error1:" + er);
+            reject("Error 1:" + er);
           });
         })
         .on("error", (err) => {
-          reject("Error2: " + err.message);
+          reject("Error 2: " + err.message);
         });
     });
   }
