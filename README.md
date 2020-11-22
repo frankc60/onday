@@ -45,11 +45,11 @@ _Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
 
 _Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[number or string]
 
-If not given, then the Class instances constructor properties (day,month) values are used instead.
+If not given, then the Class instance's constructor properties (day,month) values are used instead.
 
 #### Returns
 
-A Promise containing a sentence, about a historical event from the date parameters, or if not given then the class instance properties.
+A Promise containing a sentence, about a historical event from the date parameters, or if not given then the Class instance properties.
 
 #### Example 1
 
