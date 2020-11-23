@@ -44,9 +44,33 @@ class onday {
         let doy = await Math.ceil(
           (today - new Date(today.getFullYear(), 0, 1)) / 86400000
         );
-        resolve([doy, today]); //add one because is 0 based, ie, 1 jan is day 0, should be day 1 !!
+        resolve({ date: today, result: doy }); //add one because is 0 based, ie, 1 jan is day 0, should be day 1 !!
       } catch (error) {
         reject(`Error 3: ${error}`);
+      }
+    });
+  }
+
+  workoutdate(d = this.d, m = this.m) {
+    // d = 5, m = 6
+
+    return new Promise((resolve, reject) => {
+      try {
+        if (typeof d == "number" && typeof m == "number") {
+          if (d < 33 && (d > 0) & (m > 0) && m < 13) {
+            const now = new Date();
+            const properdate = new Date(now.getFullYear(), m - 1, d);
+            resolve(
+              `passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}`
+            );
+          } else {
+            reject("Number values out of range.");
+          }
+        } else {
+          reject("Values of wrong type. Expecting numbers");
+        }
+      } catch (er) {
+        reject(er);
       }
     });
   }
@@ -94,10 +118,11 @@ test
     console.log(`b: ${b}`);
   });
 */
-/*
-const fn = async () => {
+
+/*const fn = async () => {
   let contents = await new onday(25, 12).check();
   console.log(`contents: ${contents}`);
+  await new onday().workoutdate();
 };
 fn();
 fn(); //can be called multiple times!
