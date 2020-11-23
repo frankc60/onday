@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.4.33",
+  "version": "2.4.34",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "author": "frankc60",
