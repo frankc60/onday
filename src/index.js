@@ -8,8 +8,8 @@ const https = require("http");
  *
  * WORKLFOW
  * >npm run production
- * >git add . && git commit -m "updates" && git push
  * >npm publish (to publish to npm registry - don't need to do everytime!)
+ * >git push (chages should already be committed)
  */
 
 class onday {
