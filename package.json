@@ -1,12 +1,12 @@
 {
   "name": "onday",
-  "version": "2.4.31",
+  "version": "2.4.32",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "author": "frankc60",
   "license": "ISC",
   "scripts": {
-    "test": "npm run minifyJS && npm run testcmd",
+    "test": "npm run minifyJS --silent && npm run testcmd",
     "testcmd": "mocha test",
     "minifyJS": "terser ${npm_package_vars_source} --compress --mangle reserved=['onday','require','exports'],toplevel=true --warn --output ${npm_package_main}",
     "production": "npm run version:bump --silent && rm -f ${npm_package_main} && npm run minifyJS --silent && npm run version:add --silent && npm run testcmd && npm run gitstuff -- \"$(npm run version:extract --silent)\"",
