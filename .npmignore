@@ -6,3 +6,4 @@ nodes_modules
 .github
 __tests__
 index.spec.js
+jest.config.js
