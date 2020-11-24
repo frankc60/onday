@@ -81,11 +81,7 @@ class onday {
           if (d < 33 && (d > 0) & (m > 0) && m < 13) {
             const now = new Date();
             const properdate = new Date(now.getFullYear(), m - 1, d);
-            resolve(
-              `passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}
-              ${this.months[m - 1]}
-              `
-            );
+            //resolve(`passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}, ${this.months[m - 1]}`);
           } else {
             reject("Number values out of range.");
           }
