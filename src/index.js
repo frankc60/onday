@@ -16,9 +16,30 @@ class onday {
   static _PRV_NOW_MONTH = new Date().getMonth() + 1; //need to convert to private with a # but this is not implemented yet in terser minifier..
   static _PRV_NOW_DAY = new Date().getDate();
 
-  constructor(d = onday._PRV_NOW_DAY, m = onday._PRV_NOW_MONTH) {
-    this.d = d;
-    this.m = m;
+  static _init = (d, v) => {
+    //console.log(v + ": typeof d: " + typeof d);
+    if (typeof d == "number" || typeof d != undefined) {
+      if (v == "day") {
+        if (d < 33 && d > 0) {
+          return d;
+        } else {
+          return onday._PRV_NOW_DAY;
+        }
+      } else {
+        // v == month
+        if (d > 0 && d < 13) {
+          return d;
+        } else {
+          return onday._PRV_NOW_MONTH;
+        }
+      }
+    } else return null;
+  };
+
+  constructor(d, m) {
+    this.d = onday._init(d, "day");
+    this.m = onday._init(m, "month");
+
     this.months = {
       1: "Jan",
       2: "Feb",
@@ -39,7 +60,7 @@ class onday {
     return new Promise(async (resolve, reject) => {
       try {
         const thisYear = new Date(); //just used current year.
-        console.log(dd, mm);
+        //console.log(dd, mm);
         const today = new Date(thisYear.getFullYear(), mm - 1, dd, 1, 0, 1, 0); // month is 0 based, need to add 1
         let doy = await Math.ceil(
           (today - new Date(today.getFullYear(), 0, 1)) / 86400000
@@ -61,7 +82,9 @@ class onday {
             const now = new Date();
             const properdate = new Date(now.getFullYear(), m - 1, d);
             resolve(
-              `passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}`
+              `passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}
+              ${this.months[m - 1]}
+              `
             );
           } else {
             reject("Number values out of range.");
@@ -79,6 +102,10 @@ class onday {
     //console.log(`d:${d} - ${this.months[m]}`);
 
     return new Promise((resolve, reject) => {
+      //console.log("checking for d,m" + d + "," + m);
+      if (!(d = onday._init(d, "day")) || !(m = onday._init(m, "month"))) {
+        reject("date value invalid");
+      }
       https
         .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
           let data = "";
@@ -90,7 +117,9 @@ class onday {
 
           // The whole response has been received. Print out the result.
           resp.on("end", () => {
-            resolve(data);
+            if (/title\>Error/.test(data)) {
+              reject(`Error 3:${data}`);
+            } else resolve(data);
             //console.log(JSON.parse(data).explanation);
           });
           resp.on("error", (er) => {
@@ -118,12 +147,13 @@ test
     console.log(`b: ${b}`);
   });
 */
-
-/*const fn = async () => {
-  let contents = await new onday(25, 12).check();
+/*
+const fn = async (d, m) => {
+  let contents = await new onday().check(d, m);
   console.log(`contents: ${contents}`);
   await new onday().workoutdate();
 };
-fn();
-fn(); //can be called multiple times!
+fn(8, 10);
+fn("sdf", 1); //can be called multiple times!
+fn(10, 8);
 */
