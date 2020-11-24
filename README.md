@@ -27,11 +27,15 @@ Each call to the _check()_ method will return different content for the given da
 
 You can also pass a date argument: (day,month) to the _check()_ method. For example: `findOnThisDate.check(1,1) //Change to 1st January`
 
-## Methods
+## API
 
-### check()
+Here we cover the most 'useful' methods
 
-Use this method to retrieve information for a given date.
+### check([number, number])
+
+Use this method to retrieve information for a given date, by passing (day value, month value)
+
+If no values are passed then the current date (day, month) is used automatically.
 
 #### Syntax
 
