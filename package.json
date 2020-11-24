@@ -3,6 +3,7 @@
   "version": "2.4.35",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
+  "types": "src/index.d.ts",
   "author": "frankc60",
   "license": "ISC",
   "scripts": {
