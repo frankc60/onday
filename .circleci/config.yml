@@ -4,4 +4,5 @@ orbs:
 workflows:
   node-tests:
     jobs:
-      - node/run/testcmd
+      - run:
+          command: npm run testcmd
