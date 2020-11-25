@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
-  testcmd:
+  test-node: # name of your job
     steps:
       - run:
           command: npm run testcmd
