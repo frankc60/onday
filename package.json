@@ -1,14 +1,14 @@
 {
   "name": "onday",
-  "version": "2.4.41",
+  "version": "2.4.42",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "types": "src/index.d.ts",
   "author": "frankc60",
   "license": "ISC",
   "scripts": {
-    "test": "npm run minifyJS --silent && npm run testcmd",
-    "testcmd": "jest test",
+    "test": "jest --notify --verbose --watch",
+    "testcmd": "jest --verbose",
     "minifyJS": "terser ${npm_package_vars_source} --compress --mangle reserved=['onday','require','exports'],toplevel=true --warn --output ${npm_package_main}",
     "production": "npm run version:bump --silent && rm -f ${npm_package_main} && npm run minifyJS --silent && npm run version:add --silent && npm run testcmd && npm run gitstuff -- \"$(npm run version:extract --silent)\"",
     "version:add": "echo \"/**\\n * ${npm_package_name} v.$(npm run version:extract --silent)\\n * ©$(date '+%Y') ${npm_package_license}\\n * ${npm_package_vars_email} \\n * ${npm_package_repository_url}\\n * Build time: $(date '+%d-%b-%Y %H:%M:%S')\\n */\\n$(cat ${npm_package_main})\" > ${npm_package_main}",

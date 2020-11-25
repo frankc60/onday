@@ -128,12 +128,15 @@ class onday {
           // The whole response has been received. Print out the result.
           resp.on("end", () => {
             if (/title\>Error/.test(data)) {
-              reject(`Error 3: ${data}`);
+              reject(`Error 3:  eee ddd
+              xxxxx
+              bbbbb
+              fff ${data}`);
             } else resolve(data);
             //console.log(JSON.parse(data).explanation);
           });
           resp.on("error", (er) => {
-            reject("Error 1: " + er);
+            reject("Error 1:  " + er);
           });
         })
         .on("error", (err) => {
