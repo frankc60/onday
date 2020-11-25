@@ -2,11 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 workflows:
-  node-build:
-    - minify:
-        name: minify onday.min.js
-        command: npm run production
   node-tests:
     jobs:
-      - node/production
       - node/test
