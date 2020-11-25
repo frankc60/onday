@@ -33,7 +33,7 @@ Here we cover the most 'useful' methods
 
 ### check([number, number])
 
-Use this method to retrieve information for a given date, by passing (day value, month value)
+Use this method to retrieve information for a given date, by passing (_numeric_ day value, _numeric_ month value)
 
 If no values are passed then the current date (day, month) is used automatically.
 
@@ -45,9 +45,9 @@ onday.check(15, 10); //15 October
 
 #### Parameters
 
-_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[numeric or string]
+_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_[numeric]_
 
-_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[number or string]
+_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_[number]_
 
 If not given, then the Class instance's constructor properties (day,month) values are used instead.
 

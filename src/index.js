@@ -17,8 +17,8 @@ class onday {
   static _PRV_NOW_DAY = new Date().getDate();
 
   static _init = (d, v) => {
-    //console.log(v + ": typeof d: " + typeof d);
-    if (typeof d == "number" || typeof d != undefined) {
+    //console.log(v + ": " + d + " - typeof d: " + typeof d);
+    if (typeof d == "number" && typeof d != undefined) {
       if (v == "day") {
         if (d < 33 && d > 0) {
           return d;
@@ -39,7 +39,8 @@ class onday {
   constructor(d, m) {
     this.d = onday._init(d, "day");
     this.m = onday._init(m, "month");
-
+    //this.#d = 0;
+    this._d = 0;
     this.months = {
       1: "Jan",
       2: "Feb",
@@ -55,6 +56,18 @@ class onday {
       12: "Dec",
     };
   }
+
+  /*
+  set d(val) {
+    console.log("set d to " + val);
+    this._d = val;
+  }
+
+  get d() {
+    console.log("get d:" + _d);
+    return this._d;
+  }
+*/
 
   doy(dd = onday._PRV_NOW_DAY, mm = onday._PRV_NOW_MONTH) {
     return new Promise(async (resolve, reject) => {
@@ -77,17 +90,18 @@ class onday {
 
     return new Promise((resolve, reject) => {
       try {
-        if (typeof d == "number" && typeof m == "number") {
-          if (d < 33 && (d > 0) & (m > 0) && m < 13) {
-            const now = new Date();
-            const properdate = new Date(now.getFullYear(), m - 1, d);
-            //resolve(`passed in (${d}, ${m}) and ${now.getFullYear()} = ${properdate}, ${this.months[m - 1]}`);
-          } else {
-            reject("Number values out of range.");
-          }
-        } else {
-          reject("Values of wrong type. Expecting numbers");
+        console.log("workoutdate for d,m" + d + "," + m);
+        if (!(d = onday._init(d, "day")) || !(m = onday._init(m, "month"))) {
+          reject(`2Error: invalid date values (${d}, ${m})`);
         }
+
+        const now = new Date();
+        const properdate = new Date(now.getFullYear(), m - 1, d);
+        resolve(
+          `passed in (${d}, ${m}) ${now.getFullYear()} = ${properdate}, ${
+            this.months[m - 1]
+          }`
+        );
       } catch (er) {
         reject(er);
       }
@@ -100,7 +114,7 @@ class onday {
     return new Promise((resolve, reject) => {
       //console.log("checking for d,m" + d + "," + m);
       if (!(d = onday._init(d, "day")) || !(m = onday._init(m, "month"))) {
-        reject("date value invalid");
+        reject(`Error: invalid date values (${d}, ${m})`);
       }
       https
         .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
@@ -114,12 +128,12 @@ class onday {
           // The whole response has been received. Print out the result.
           resp.on("end", () => {
             if (/title\>Error/.test(data)) {
-              reject(`Error 3:${data}`);
+              reject(`Error 3: ${data}`);
             } else resolve(data);
             //console.log(JSON.parse(data).explanation);
           });
           resp.on("error", (er) => {
-            reject("Error 1:" + er);
+            reject("Error 1: " + er);
           });
         })
         .on("error", (err) => {
@@ -145,11 +159,15 @@ test
 */
 /*
 const fn = async (d, m) => {
-  let contents = await new onday().check(d, m);
-  console.log(`contents: ${contents}`);
-  await new onday().workoutdate();
+  try {
+    let contents = await new onday().check(d, m);
+    console.log(`contents: ${contents}`);
+    await new onday(d, m).workoutdate();
+  } catch (e) {
+    console.error("catch:" + e);
+  }
 };
 fn(8, 10);
-fn("sdf", 1); //can be called multiple times!
-fn(10, 8);
+//fn(15, "ddd"); //can be called multiple times!
+//fn(10, 8);
 */
