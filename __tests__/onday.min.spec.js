@@ -1,24 +1,22 @@
 //const assert = require("assert");
-//const expect = require("jest");
+//aconst expect = require("jest");
+//const { expect } = require("chai");
 //const { expect } = require("chai");
 const onday = require("../onday.min");
 const exec = require("child_process").exec;
 
 beforeAll(() => {
   return new Promise((resolve, reject) => {
-    console.log(
-      "START -------------------------------------------------------"
-    );
+    console.log("beforeAll()");
 
     const child = exec(
       "npm run minifyJS && npm run version:add --silent",
       function (err, stdout, stderr) {
         if (err) reject(err);
         else {
-          console.log(
+          /*  console.log(
             "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-          );
-
+          );  */
           resolve(stdout);
         }
       }
@@ -43,21 +41,26 @@ describe("check()", () => {
   const dnow = new Date();
   //******************************************************************************** */
   //console.log(a);
-  test("it should work an object", () => {
+  test("it should work an object, get current date and month", () => {
     expect(typeof a).toBe("object");
+
+    const expected = { d: dnow.getDate(), m: dnow.getMonth() + 1 };
+    // console.log(a);
+    expect(a).toMatchObject(expected);
   });
   //******************************************************************************** */
-  test("should contain todays date values: day & month", async () => {
-    // await console.log("a" + a.d);
-    // expect(a.d).toEqual(dnow.getDate());
-    // expect(a.m).toEqual(dnow.getMonth() + 1);
+  test("pass in 15 and 11 (15 Nov), check output", async () => {
+    const w = await a.check(15, 11);
+    // console.log(`w:${w}`);
+
+    expect(w).toMatch(/November 15.+/);
     expect(true).toBe(true);
   });
   //******************************************************************************** */
-  test("run a regex match", async () => {
+  test("pass invalid date values - Promise catch a rejection - check text", async () => {
     try {
       let t = await a.check("blah", 666);
-      console.log(`t: ${t}`);
+      //console.log(`t: ${t}`);
       //Failed: "Error: invalid date values (null, null)"
 
       expect(t).toContain("should not come here, should reject - catch!");
@@ -70,21 +73,58 @@ describe("check()", () => {
       //  expect(e).rejects.toEqual({
       //   error: "Error: invalid date values (null,null)",
       // });
-      console.log("error " + e);
+      //console.log("error " + e);
     }
   });
   //******************************************************************************** */
-  test("Promise(Reject) false data", async () => {
-    /*  new onday("ss")
-      .check()
+  test("pass in invalid day but valid month ('xxx',6)", async () => {
+    new onday()
+      .check("xxx", 6)
       .then((d) => {
-        expect(d).toMatch("Errrrrr");
+        console.log("d:" + d);
+        //expect(d).toMatch("Errrrrr");
       })
       .catch((e) => {
-        expect(e).toMatch("ffrror");
+        //expect(e).toMatch("ffrror");
+        //console.log("catch-" + e);
+        expect(e).toMatch(/invalid date values.+/);
       });
-  */
+
     expect(1234).toBe(1234);
+  });
+  //******************************************************************************** */
+  test("pass in VALID DAY but INVALID MONTH (15,'xxx')", async () => {
+    new onday()
+      .check(15, "XXXA")
+      .then((d) => {
+        console.log("ERROR, SHOULD NOT SEE THIS OUTPUT!!:" + d);
+        //expect(d).toMatch("Errrrrr");
+      })
+      .catch((e) => {
+        //expect(e).toMatch("ffrror");
+        //console.log("catch-" + e);
+        expect(e).toMatch(/invalid date values.+/);
+      });
+
+    expect(1234).toBe(1234);
+  });
+  //******************************************************************************** */
+  test("pass in NO VALUES (), expect current date with info", async () => {
+    new onday()
+      .check()
+      .then((d) => {
+        //console.log("d:" + d);
+        //expect(d).toMatch("Errrrrr");
+        //const regex = new RegExp(`[${item}]`, "g");
+        const reg = new RegExp(`${dnow.getDate()}.+the day in`, "g");
+        expect(d).toMatch(reg);
+        expect(1234).toBe(1234);
+      })
+      .catch((e) => {
+        //expect(e).toMatch("ffrror");
+        //console.log("catch-" + e);
+        expect(e).toMatch(/should not see this /);
+      });
   });
   //******************************************************************************** */
 });

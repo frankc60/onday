@@ -48,7 +48,7 @@ class onday {
       ? m
       : onday._PRV_NOW_MONTH;
     //this.#d = 0;
-    this._d = 0;
+    //this.#d = 0;
     this.months = {
       1: "Jan",
       2: "Feb",
