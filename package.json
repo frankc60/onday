@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.4.43",
+  "version": "2.4.44",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "types": "src/index.d.ts",
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest --notify --verbose",
     "testcmd": "jest --verbose --watch",
-    "minifyJS": "terser ${npm_package_vars_source} --compress --mangle reserved=['onday','require','exports'],toplevel=true --warn --output ${npm_package_main}",
+    "minifyJS": "terser ${npm_package_vars_source} --compress  passes=4  --mangle reserved=['require','exports'],toplevel=true,keep_classnames=false,module=true --keep_fnames=false  --warn --output ${npm_package_main} ",
     "production": "npm run version:bump --silent && rm -f ${npm_package_main} && npm run minifyJS --silent && npm run version:add --silent && npm test && npm run gitstuff -- \"$(npm run version:extract --silent)\"",
     "version:add": "echo \"/**\\n * ${npm_package_name} v.$(npm run version:extract --silent)\\n * ©$(date '+%Y') ${npm_package_license}\\n * ${npm_package_vars_email} \\n * ${npm_package_repository_url}\\n * Build time: $(date '+%d-%b-%Y %H:%M:%S')\\n */\\n$(cat ${npm_package_main})\" > ${npm_package_main}",
     "version:bump": "npm version patch --no-git-tag-version --silent",

@@ -15,6 +15,8 @@ const https = require("http");
 class onday {
   static _PRV_NOW_MONTH = new Date().getMonth() + 1; //need to convert to private with a # but this is not implemented yet in terser minifier..
   static _PRV_NOW_DAY = new Date().getDate();
+  static _PRV_NOW_YEAR = new Date().getFullYear();
+
   /*
   static _init = (d, v) => {
     //console.log(v + ": " + d + " - typeof d: " + typeof d);
@@ -37,11 +39,12 @@ class onday {
     } else return null;
   };
 */
+
   constructor(d, m) {
-    this.d = onday.dateCheck(new Date().getFullYear(), m, d)
+    this.d = onday.dateCheck(onday._PRV_NOW_YEAR, m, d)
       ? d
       : onday._PRV_NOW_DAY;
-    this.m = onday.dateCheck(new Date().getFullYear(), m, d)
+    this.m = onday.dateCheck(onday._PRV_NOW_YEAR, m, d)
       ? m
       : onday._PRV_NOW_MONTH;
     //this.#d = 0;
@@ -76,9 +79,12 @@ class onday {
 
   static dateCheck = (year, month, day) => {
     //console.log(`dateCheck(${year},${month},${day}`);
+    //console.log(this.months[month - 1]);
     const date = new Date(year, +month - 1, day);
     const isValidDate = Boolean(+date) && date.getDate() == day;
     //console.log("isValidDate: " + isValidDate);
+    //let apple = 123; //this is ignored, as not used, so removed by terser.
+
     return isValidDate;
   };
   /*
@@ -128,11 +134,7 @@ class onday {
 
     return new Promise((resolve, reject) => {
       //console.log("checking for d,m" + d + "," + m);
-      const checkDatesAreValid = onday.dateCheck(
-        new Date().getFullYear(),
-        m,
-        d
-      );
+      const checkDatesAreValid = onday.dateCheck(onday._PRV_NOW_YEAR, m, d);
 
       if (checkDatesAreValid) {
         //check if date values are valid
