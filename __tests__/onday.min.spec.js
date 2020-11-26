@@ -56,7 +56,7 @@ describe("check()", () => {
   //******************************************************************************** */
   test("run a regex match", async () => {
     try {
-      let t = await a.check();
+      let t = await a.check("blah", 666);
       console.log(`t: ${t}`);
       //Failed: "Error: invalid date values (null, null)"
 

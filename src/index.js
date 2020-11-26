@@ -15,9 +15,10 @@ const https = require("http");
 class onday {
   static _PRV_NOW_MONTH = new Date().getMonth() + 1; //need to convert to private with a # but this is not implemented yet in terser minifier..
   static _PRV_NOW_DAY = new Date().getDate();
-
+  /*
   static _init = (d, v) => {
     //console.log(v + ": " + d + " - typeof d: " + typeof d);
+
     if (typeof d == "number" && typeof d != undefined) {
       if (v == "day") {
         if (d < 33 && d > 0) {
@@ -35,10 +36,14 @@ class onday {
       }
     } else return null;
   };
-
+*/
   constructor(d, m) {
-    this.d = onday._init(d, "day");
-    this.m = onday._init(m, "month");
+    this.d = onday.dateCheck(new Date().getFullYear(), m, d)
+      ? d
+      : onday._PRV_NOW_DAY;
+    this.m = onday.dateCheck(new Date().getFullYear(), m, d)
+      ? m
+      : onday._PRV_NOW_MONTH;
     //this.#d = 0;
     this._d = 0;
     this.months = {
@@ -76,7 +81,7 @@ class onday {
     //console.log("isValidDate: " + isValidDate);
     return isValidDate;
   };
-
+  /*
   doy(dd = onday._PRV_NOW_DAY, mm = onday._PRV_NOW_MONTH) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -92,7 +97,9 @@ class onday {
       }
     });
   }
+*/
 
+  /*
   workoutdate(d = this.d, m = this.m) {
     // d = 5, m = 6
 
@@ -115,7 +122,7 @@ class onday {
       }
     });
   }
-
+*/
   check(d = this.d, m = this.m) {
     //console.log(`d:${d} - ${this.months[m]}`);
 
@@ -126,6 +133,7 @@ class onday {
         m,
         d
       );
+
       if (checkDatesAreValid) {
         //check if date values are valid
         https
@@ -141,9 +149,9 @@ class onday {
             resp.on("end", () => {
               if (/title\>Error/.test(data)) {
                 reject(`Error 3:  eee ddd
-              xxxxx
-              bbbbb
-              fff ${data}`);
+              test
+              test2
+              test3 ${data}`);
               } else resolve(data);
               //console.log(JSON.parse(data).explanation);
             });
@@ -175,7 +183,7 @@ test
     console.log(`b: ${b}`);
   });
 */
-
+/*
 const fn = async (d, m) => {
   try {
     let contents = await new onday().check(d, m);
@@ -186,5 +194,6 @@ const fn = async (d, m) => {
   }
 };
 fn(30, 11);
+*/
 //fn(15, "ddd"); //can be called multiple times!
 //fn(10, 8);
