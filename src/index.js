@@ -69,6 +69,14 @@ class onday {
   }
 */
 
+  static dateCheck = (year, month, day) => {
+    //console.log(`dateCheck(${year},${month},${day}`);
+    const date = new Date(year, +month - 1, day);
+    const isValidDate = Boolean(+date) && date.getDate() == day;
+    //console.log("isValidDate: " + isValidDate);
+    return isValidDate;
+  };
+
   doy(dd = onday._PRV_NOW_DAY, mm = onday._PRV_NOW_MONTH) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -113,35 +121,42 @@ class onday {
 
     return new Promise((resolve, reject) => {
       //console.log("checking for d,m" + d + "," + m);
-      if (!(d = onday._init(d, "day")) || !(m = onday._init(m, "month"))) {
-        reject(`Error: invalid date values (${d}, ${m})`);
-      }
-      https
-        .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
-          let data = "";
+      const checkDatesAreValid = onday.dateCheck(
+        new Date().getFullYear(),
+        m,
+        d
+      );
+      if (checkDatesAreValid) {
+        //check if date values are valid
+        https
+          .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
+            let data = "";
 
-          // A chunk of data has been recieved.
-          resp.on("data", (chunk) => {
-            data += chunk;
-          });
+            // A chunk of data has been recieved.
+            resp.on("data", (chunk) => {
+              data += chunk;
+            });
 
-          // The whole response has been received. Print out the result.
-          resp.on("end", () => {
-            if (/title\>Error/.test(data)) {
-              reject(`Error 3:  eee ddd
+            // The whole response has been received. Print out the result.
+            resp.on("end", () => {
+              if (/title\>Error/.test(data)) {
+                reject(`Error 3:  eee ddd
               xxxxx
               bbbbb
               fff ${data}`);
-            } else resolve(data);
-            //console.log(JSON.parse(data).explanation);
+              } else resolve(data);
+              //console.log(JSON.parse(data).explanation);
+            });
+            resp.on("error", (er) => {
+              reject("Error 1:  " + er);
+            });
+          })
+          .on("error", (err) => {
+            reject("Error 2: " + err.message);
           });
-          resp.on("error", (er) => {
-            reject("Error 1:  " + er);
-          });
-        })
-        .on("error", (err) => {
-          reject("Error 2: " + err.message);
-        });
+      } else {
+        reject(`Error: invalid date values (${d}, ${m})`);
+      }
     });
   }
 }
@@ -160,7 +175,7 @@ test
     console.log(`b: ${b}`);
   });
 */
-/*
+
 const fn = async (d, m) => {
   try {
     let contents = await new onday().check(d, m);
@@ -170,7 +185,6 @@ const fn = async (d, m) => {
     console.error("catch:" + e);
   }
 };
-fn(8, 10);
+fn(30, 11);
 //fn(15, "ddd"); //can be called multiple times!
 //fn(10, 8);
-*/
