@@ -1,6 +1,6 @@
 {
   "name": "onday",
-  "version": "2.4.45",
+  "version": "2.4.46",
   "description": "Get some historical event on the given date (day / month)",
   "main": "onday.min.js",
   "types": "src/index.d.ts",
@@ -29,7 +29,7 @@
     "jest": "^26.6.3",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "terser": "^5.5.0"
+    "terser": "^5.5.1"
   },
   "dependencies": {},
   "repository": {

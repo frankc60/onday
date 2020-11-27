@@ -13,6 +13,8 @@ const https = require("http");
  */
 
 class onday {
+  //#bar = "FooBar";
+
   static _PRV_NOW_MONTH = new Date().getMonth() + 1; //need to convert to private with a # but this is not implemented yet in terser minifier..
   static _PRV_NOW_DAY = new Date().getDate();
   static _PRV_NOW_YEAR = new Date().getFullYear();
@@ -47,7 +49,7 @@ class onday {
     this.m = onday.dateCheck(onday._PRV_NOW_YEAR, m, d)
       ? m
       : onday._PRV_NOW_MONTH;
-    //this.#d = 0;
+
     //this.#d = 0;
     this.months = {
       1: "Jan",
@@ -129,7 +131,7 @@ class onday {
     });
   }
 */
-  check(d = this.d, m = this.m) {
+  check(d = this.d, m = this.m, mock) {
     //console.log(`d:${d} - ${this.months[m]}`);
 
     return new Promise((resolve, reject) => {
@@ -138,32 +140,44 @@ class onday {
 
       if (checkDatesAreValid) {
         //check if date values are valid
-        https
-          .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
-            let data = "";
+        if (mock) {
+          setTimeout(
+            function (months) {
+              resolve(
+                `On ${months[m]} ${d} is the day something in history happened - mock data.`
+              );
+            },
+            1000,
+            this.months
+          );
+        } else {
+          https
+            .get(`http://numbersapi.com/${m}/${d}/date`, (resp) => {
+              let data = "";
 
-            // A chunk of data has been recieved.
-            resp.on("data", (chunk) => {
-              data += chunk;
-            });
+              // A chunk of data has been recieved.
+              resp.on("data", (chunk) => {
+                data += chunk;
+              });
 
-            // The whole response has been received. Print out the result.
-            resp.on("end", () => {
-              if (/title\>Error/.test(data)) {
-                reject(`Error 3:  eee ddd
+              // The whole response has been received. Print out the result.
+              resp.on("end", () => {
+                if (/title\>Error/.test(data)) {
+                  reject(`Error 3:  eee ddd
               test
               test2
               test3 ${data}`);
-              } else resolve(data);
-              //console.log(JSON.parse(data).explanation);
+                } else resolve(data);
+                //console.log(JSON.parse(data).explanation);
+              });
+              resp.on("error", (er) => {
+                reject("Error 1:  " + er);
+              });
+            })
+            .on("error", (err) => {
+              reject("Error 2: " + err.message);
             });
-            resp.on("error", (er) => {
-              reject("Error 1:  " + er);
-            });
-          })
-          .on("error", (err) => {
-            reject("Error 2: " + err.message);
-          });
+        }
       } else {
         reject(`Error: invalid date values (${d}, ${m})`);
       }
