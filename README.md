@@ -31,11 +31,11 @@ You can also pass a date argument: (day,month) to the _check()_ method. For exam
 
 Here we cover the most 'useful' methods
 
-### check([number, number])
+### check([number, number[,true]])
 
-Use this method to retrieve information for a given date, by passing (_numeric_ day value, _numeric_ month value)
+Use this method to retrieve information for a given date, by passing (_numeric_ day value, _numeric_ month value). The third argument is a boolean and is only required if to retrieve mock text - this is here for testing purposes only, and will return text without connecting to the internet.
 
-If no values are passed then the current date (day, month) is used automatically.
+If no values are passed then the current date (day, month) will be used automatically.
 
 #### Syntax
 
