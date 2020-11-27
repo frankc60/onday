@@ -7,3 +7,4 @@ nodes_modules
 __tests__
 index.spec.js
 jest.config.js
+.circleci
