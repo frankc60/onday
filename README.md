@@ -4,7 +4,7 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/min/onday)
 ![npm](https://img.shields.io/npm/dw/onday)
 
-Returns a random one sentence about a historical event that happened on the given date ( day and month ).
+Returns a random sentence about a historical event that happened on the given date ( day and month ).
 
 ## Install
 

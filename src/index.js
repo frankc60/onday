@@ -43,12 +43,14 @@ class onday {
 */
 
   constructor(d, m) {
-    this.d = onday.dateCheck(onday._PRV_NOW_YEAR, m, d)
-      ? d
-      : onday._PRV_NOW_DAY;
-    this.m = onday.dateCheck(onday._PRV_NOW_YEAR, m, d)
-      ? m
-      : onday._PRV_NOW_MONTH;
+    this.d =
+      onday.dateCheck(onday._PRV_NOW_YEAR, m, d) === true
+        ? d
+        : onday._PRV_NOW_DAY;
+    this.m =
+      onday.dateCheck(onday._PRV_NOW_YEAR, m, d) === true
+        ? m
+        : onday._PRV_NOW_MONTH;
 
     //this.#d = 0;
     this.months = {
@@ -65,6 +67,21 @@ class onday {
       11: "Nov",
       12: "Dec",
     };
+
+    //FOR TESTING PURPOSES:  this.init(d, m);
+  }
+
+  init(d, m) {
+    //TESTING
+    console.log(
+      `init: datecheck returns: ${onday.dateCheck(
+        onday._PRV_NOW_YEAR,
+        m,
+        d
+      )} - this.d = ${this.d}, this.m = ${this.m}\nonday._PRV_NOW_DAY = ${
+        onday._PRV_NOW_DAY
+      }`
+    );
   }
 
   /*
@@ -86,8 +103,12 @@ class onday {
     const isValidDate = Boolean(+date) && date.getDate() == day;
     //console.log("isValidDate: " + isValidDate);
     //let apple = 123; //this is ignored, as not used, so removed by terser.
+    let mValid = month > 0 && month < 13 ? true : false;
+    //mValid == false ? console.log(`mValid: ${mValid}`) : null;
+    //console.log(`isValidDate:${isValidDate}`);
 
-    return isValidDate;
+    // if both isValidDate and mValid == true then return true, otherwise return false
+    return (isValidDate && mValid) == true ? true : false;
   };
   /*
   doy(dd = onday._PRV_NOW_DAY, mm = onday._PRV_NOW_MONTH) {
@@ -131,6 +152,38 @@ class onday {
     });
   }
 */
+
+  getdate(d = this.d, m = this.m) {
+    return new Promise((resolve, reject) => {
+      //console.log("checking for d,m" + d + "," + m);
+      const checkDatesAreValid = onday.dateCheck(onday._PRV_NOW_YEAR, m, d);
+
+      //console.log(checkDatesAreValid);
+      if (checkDatesAreValid) {
+        let nth;
+        //let a = d.toString();
+        //console.log("a.charAt(a.length - 1): " + a.charAt(a.length - 1));
+        switch (d.toString().charAt(d.toString().length - 1)) {
+          case "1":
+            nth = "st";
+            break;
+          case "2":
+            nth = "nd";
+            break;
+          case "3":
+            nth = "rd";
+            break;
+          default:
+            nth = "th";
+            break;
+        }
+        resolve(`${d}${nth} ${this.months[m]}`);
+      } else {
+        reject(`Date is invalid: ${d}-${m}-${onday._PRV_NOW_YEAR}`);
+      }
+    });
+  }
+
   check(d = this.d, m = this.m, mock) {
     //console.log(`d:${d} - ${this.months[m]}`);
 
@@ -213,3 +266,13 @@ fn(30, 11);
 */
 //fn(15, "ddd"); //can be called multiple times!
 //fn(10, 8);
+/*
+new onday()
+  .getdate(23, 4)
+  .then((x) => {
+    console.log(`getdate = ${x}`);
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+*/

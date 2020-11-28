@@ -41,7 +41,8 @@ describe("noday()", () => {
   const a = new onday();
   const dnow = new Date();
   //******************************************************************************** */
-  //console.log(a);
+  //console.log(`a: ${JSON.stringify(a}`);
+
   test("it should work an object, get current date and month, check object values", () => {
     expect(typeof a).toBe("object");
 
@@ -70,7 +71,7 @@ describe("check()", () => {
       //Failed: "Error: invalid date values (null, null)"
 
       expect(t).toContain("should not come here, should reject - catch!");
-      // expect(t).rejects.toEqual("Error: invalid date values");
+      expect(t).rejects.toEqual("Error: invalid date values");
       //expect(t).toMatch(/invalid date values/);
       //expect(t).toContain("is the day");
     } catch (e) {
@@ -84,7 +85,7 @@ describe("check()", () => {
       .check("xxx", 6, true)
       .then((d) => {
         console.log("d:" + d);
-        //expect(d).toMatch("Errrrrr");
+        expect(d).toMatch("SHOULD NOT SEE THIS!!!, SHOULD FAIL");
       })
       .catch((e) => {
         //expect(e).toMatch("ffrror");
@@ -133,3 +134,74 @@ describe("check()", () => {
   });
   //******************************************************************************** */
 });
+//******************************************************************************** */
+//******************************************************************************** */
+//******************************************************************************** */
+//******************************************************************************** */
+describe("getdate()", () => {
+  const a = new onday();
+  const dnow = new Date();
+
+  test("try 23,4 = 23rd Apr", () => {
+    a.getdate(23, 4)
+      .then((x) => {
+        //console.log(`getdate = ${x}`);
+        expect(x).toMatch(/23rd Apr/);
+        expect(true).toBe(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        expect(true).toBe(false);
+      });
+  });
+  test("try 31,1 = 31st Jan", () => {
+    a.getdate(31, 1)
+      .then((x) => {
+        //console.log(`getdate = ${x}`);
+        expect(x).toMatch(/31st Jan/);
+        expect(true).toBe(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        expect(true).toBe(false);
+      });
+  });
+  test("try 2,7 = 2nd Jul", () => {
+    a.getdate(2, 7)
+      .then((x) => {
+        //console.log(`getdate = ${x}`);
+        expect(x).toMatch(/2nd Jul/);
+        expect(true).toBe(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        expect(true).toBe(false);
+      });
+  });
+  test("try 8,10 = 8th Oct", () => {
+    a.getdate(8, 10)
+      .then((x) => {
+        //console.log(`getdate = ${x}`);
+        expect(x).toMatch(/8th Oct/);
+        expect(true).toBe(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        expect(true).toBe(false);
+      });
+  });
+  test("try 31,11 = 31st Nov - Expect Failure - invalid date", () => {
+    a.getdate(31, 11)
+      .then((x) => {
+        //console.log(`getdate = ${x}`);
+        expect(x).toMatch(/dont see here/);
+        expect(true).toBe(false);
+      })
+      .catch((e) => {
+        expect(e).toMatch(/Date is invalid/);
+        //console.error(e);
+        //expect(true).toBe(true);
+      });
+  });
+});
+//******************************************************************************** */
