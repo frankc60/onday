@@ -104,3 +104,53 @@ fn(); //can be called multiple times!
 contents: December 25th is the day in 1974 that Cyclone Tracy devastates Darwin, Northern Territory Australia.
 contents: December 25th is the day in 1826 that the Eggnog Riot at the United States Military Academy concludes after beginning the previous evening.
 ```
+
+### getdate([number, number])
+
+Use this method to retrieve a formatted return date. Pass optional parameters (_numeric_ day value, _numeric_ month value) to get the formatted date.
+
+If no values are passed then the default current date (day, month) will be used automatically.
+
+Errorhandling will return a rejected promise.
+
+#### Syntax
+
+```js
+onday.getdate(15, 10); // returns: '15th Oct'
+```
+
+#### Parameters
+
+_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_[numeric]_
+
+_Optional_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_[number]_
+
+If not given, then the Class instance's constructor properties (day,month) values are used instead.
+
+#### Returns
+
+A Promise containing the formatted date as a _String_.
+
+#### Example
+
+Using then().catch()
+
+```js
+const onday = require("onday");
+
+const myDate = new onday();
+myDate
+  .getdate(8, 10)
+  .then((val) => {
+    console.log(`getdate = ${val}`);
+  })
+  .catch((e) => {
+    console.error(`problem with the date: ${e}`);
+  });
+```
+
+#### Example Output
+
+```shell
+getdate = 8th Oct
+```
