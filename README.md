@@ -1,9 +1,10 @@
 # onday
 
 ![npm](https://img.shields.io/npm/v/onday)
+![install size](https://badgen.net/packagephobia/install/onday)
 ![CI Tests](https://img.shields.io/circleci/build/github/frankc60/onday)
 ![Github Build](https://img.shields.io/github/workflow/status/frankc60/onday/Node.js%20CI)
-![npm](https://img.shields.io/npm/dw/onday)
+![npm downloads](https://img.shields.io/npm/dt/onday)
 
 Returns a random sentence about a historical event that happened on the given date ( day and month ).
 
