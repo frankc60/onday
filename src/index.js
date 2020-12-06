@@ -54,18 +54,18 @@ class onday {
 
     //this.#d = 0;
     this.months = {
-      1: "Jan",
-      2: "Feb",
-      3: "Mar",
-      4: "Apr",
-      5: "May",
-      6: "Jun",
-      7: "Jul",
-      8: "Aug",
-      9: "Sep",
-      10: "Oct",
-      11: "Nov",
-      12: "Dec",
+      1: ["Jan", "January"],
+      2: ["Feb", "February"],
+      3: ["Mar", "March"],
+      4: ["Apr", "April"],
+      5: ["May", "May"],
+      6: ["Jun", "June"],
+      7: ["Jul", "July"],
+      8: ["Aug", "August"],
+      9: ["Sep", "September"],
+      10: ["Oct", "October"],
+      11: ["Nov", "November"],
+      12: ["Dec", "December"],
     };
 
     //FOR TESTING PURPOSES:  this.init(d, m);
@@ -177,7 +177,7 @@ class onday {
             nth = "th";
             break;
         }
-        resolve(`${d}${nth} ${this.months[m]}`);
+        resolve(`${d}${nth} ${this.months[m][0]}`);
       } else {
         reject(`Date is invalid: ${d}-${m}-${onday._PRV_NOW_YEAR}`);
       }
@@ -197,7 +197,7 @@ class onday {
           setTimeout(
             function (months) {
               resolve(
-                `On ${months[m]} ${d} is the day something in history happened - mock data.`
+                `On ${months[m][0]} ${d} is the day something in history happened - mock data.`
               );
             },
             1000,
