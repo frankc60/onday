@@ -1,7 +1,6 @@
 src
 .gitignore
 index.js
-package-lock.json
 nodes_modules
 .github
 __tests__
